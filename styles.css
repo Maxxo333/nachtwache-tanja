@@ -1,0 +1,190 @@
+/* Nachtwache mit Tanja – ruhiges, dunkles Design für den Nachtdienst */
+:root {
+  --hintergrund: #0f1424;
+  --karte: #1a2138;
+  --karte-hell: #232b47;
+  --rand: #2e3756;
+  --text: #ece6da;
+  --text-leise: #a9a7b8;
+  --akzent: #f2c46d;
+  --akzent-dunkel: #3a3220;
+  --akzent-text: #1a1408;
+  --radius: 18px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html { font-size: 112.5%; /* 18px, richtet sich nach der Systemschrift */ -webkit-text-size-adjust: 100%; }
+html.gross { font-size: 131.25%; /* 21px */ }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--hintergrund);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Extra gedimmt: alles etwas dunkler und wärmer */
+html.gedimmt body { filter: brightness(0.72) sepia(0.15); }
+
+button, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 3px solid var(--akzent); outline-offset: 3px; }
+
+.unsichtbar {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}
+
+/* Kopf */
+.kopf {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 1rem 1rem 0.5rem;
+}
+.kopf-icon { width: 2.4rem; height: 2.4rem; flex: none; }
+.kopf-text { flex: 1; min-width: 0; }
+.kopf h1 { margin: 0; font-size: 1.15rem; font-weight: 700; letter-spacing: 0.01em; }
+.widmung { margin: 0; color: var(--akzent); font-size: 0.85rem; }
+
+.knopf-rund {
+  width: 3rem; height: 3rem; flex: none;
+  border-radius: 50%; border: 1px solid var(--rand);
+  background: var(--karte); font-size: 1.3rem;
+}
+
+main {
+  flex: 1;
+  width: 100%; max-width: 34rem; margin: 0 auto;
+  padding: 0.5rem 1rem 1rem;
+}
+
+.ansicht { display: flex; flex-direction: column; gap: 1rem; }
+.ansicht[hidden] { display: none; }
+
+/* Startseite */
+.gruss { margin: 0.75rem 0 0; font-size: 1.6rem; line-height: 1.25; }
+.unterzeile { margin: 0; color: var(--text-leise); }
+
+.knopf-gross {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.3rem;
+  width: 100%; min-height: 8rem; margin-top: 0.5rem;
+  border: none; border-radius: 26px;
+  background: var(--akzent); color: var(--akzent-text);
+  font-size: 1.45rem; font-weight: 800;
+  box-shadow: 0 6px 24px rgba(242, 196, 109, 0.18);
+  transition: transform 0.12s ease;
+}
+.knopf-gross:active { transform: scale(0.98); }
+.knopf-gross-symbol { font-size: 1.8rem; line-height: 1; }
+
+.abschnitt { margin: 0.75rem 0 0; font-size: 0.95rem; font-weight: 600; color: var(--text-leise); }
+
+.kacheln { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+.kachel {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 0.25rem;
+  min-height: 5.2rem; padding: 0.8rem 0.9rem;
+  border: 1px solid var(--rand); border-radius: var(--radius);
+  background: var(--karte); text-align: left; font-weight: 600; font-size: 0.95rem;
+  line-height: 1.25; overflow-wrap: anywhere; hyphens: auto;
+}
+.kachel span { font-size: 1.4rem; }
+.kachel:active { background: var(--karte-hell); }
+.kachel-breit { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 0.6rem; min-height: 3.6rem; }
+
+/* Karten */
+.karte {
+  display: flex; flex-direction: column; gap: 0.9rem;
+  padding: 1.25rem; border-radius: var(--radius);
+  background: var(--karte); border: 1px solid var(--rand);
+}
+.karte-etikett { margin: 0; color: var(--akzent); font-weight: 700; font-size: 0.95rem; }
+.karte-text { margin: 0; font-size: 1.35rem; line-height: 1.4; font-weight: 500; }
+.karte-zusatz {
+  margin: 0; padding: 0.9rem 1rem; border-radius: 14px;
+  background: var(--akzent-dunkel); color: var(--text); font-size: 1.1rem;
+}
+.karte-zusatz[hidden] { display: none; }
+.hinweis { margin: 0; color: var(--text-leise); }
+.klein { font-size: 0.85rem; }
+
+/* Knöpfe */
+.leiste { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.leiste > * { flex: 1 1 8rem; }
+
+.knopf-haupt, .knopf-zweit, .knopf-wahl {
+  min-height: 3.4rem; padding: 0.7rem 1rem;
+  border-radius: 14px; font-weight: 700; font-size: 1.05rem;
+}
+.knopf-haupt:disabled { opacity: 0.45; }
+.knopf-haupt { border: none; background: var(--akzent); color: var(--akzent-text); }
+.knopf-zweit { border: 1px solid var(--rand); background: var(--karte-hell); }
+.knopf-zweit[hidden], .knopf-wahl[hidden] { display: none; }
+.knopf-wahl {
+  width: 100%; border: 1px solid var(--rand); background: var(--karte-hell);
+  text-align: left; font-weight: 600;
+}
+.knopf-wahl.gewaehlt { border-color: var(--akzent); background: var(--akzent-dunkel); }
+
+.wde-wahl { display: flex; flex-direction: column; gap: 0.5rem; }
+.wde-wahl[hidden] { display: none; }
+.wde-oder { text-align: center; color: var(--text-leise); font-size: 0.9rem; }
+
+.checkin-wahl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; }
+.checkin-wahl .knopf-wahl:last-child { grid-column: 1 / -1; }
+
+/* Wortkette */
+.wk-letztes { margin: 0; font-size: 1.9rem; font-weight: 800; text-align: center; color: var(--akzent); word-break: break-word; }
+.wk-meldung { margin: 0; min-height: 1.5em; text-align: center; }
+.wk-stand { margin: 0; color: var(--text-leise); font-size: 0.9rem; text-align: center; }
+.wk-formular { display: flex; gap: 0.5rem; }
+.wk-formular input {
+  flex: 1; min-width: 0; min-height: 3.4rem; padding: 0 1rem;
+  border-radius: 14px; border: 1px solid var(--rand); background: var(--hintergrund);
+  font-size: 1.15rem;
+}
+.wk-formular .knopf-haupt { flex: none; }
+
+/* Einstellungen */
+.schalter { display: flex; align-items: center; gap: 0.8rem; min-height: 3rem; }
+.schalter input { width: 1.6rem; height: 1.6rem; accent-color: var(--akzent); flex: none; }
+
+.auf-formular { display: flex; flex-direction: column; gap: 0.6rem; }
+.auf-formular textarea {
+  width: 100%; padding: 0.8rem 1rem; resize: vertical;
+  border-radius: 14px; border: 1px solid var(--rand); background: var(--hintergrund);
+}
+.auf-liste { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.auf-liste li {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.6rem 0.6rem 0.6rem 0.9rem; border-radius: 12px; background: var(--karte-hell);
+}
+.auf-liste li span { flex: 1; overflow-wrap: anywhere; }
+.auf-liste button {
+  min-width: 3rem; min-height: 3rem; border-radius: 10px;
+  border: 1px solid var(--rand); background: var(--karte);
+}
+
+.fuss {
+  padding: 0.75rem 1rem 1.25rem; text-align: center;
+  color: var(--text-leise); font-size: 0.85rem;
+}
+
+/* Sanftes Einblenden – entfällt bei reduzierter Bewegung */
+.einblenden { animation: einblenden 0.25s ease-out; }
+@keyframes einblenden { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+@media (max-width: 340px) {
+  .kacheln { grid-template-columns: 1fr; }
+  .gruss { font-size: 1.4rem; }
+}

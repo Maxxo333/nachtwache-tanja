@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Mondsichel mit „T“ für Tanja. Gleiche Geometrie wie werkzeuge/icons-erzeugen.js -->
+  <defs>
+    <mask id="sichel">
+      <rect width="100" height="100" fill="#fff"/>
+      <circle cx="60" cy="42" r="25" fill="#000"/>
+    </mask>
+  </defs>
+  <rect width="100" height="100" rx="22" fill="#0f1424"/>
+  <circle cx="46" cy="52" r="30" fill="#f2c46d" mask="url(#sichel)"/>
+  <rect x="50" y="36" width="24" height="5" rx="1" fill="#f4efe6"/>
+  <rect x="59.5" y="36" width="5" height="24" rx="1" fill="#f4efe6"/>
+  <circle cx="25" cy="25" r="2" fill="#f4efe6"/>
+  <circle cx="80" cy="76" r="1.6" fill="#f4efe6"/>
+</svg>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; manifest-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'">
+  <meta name="theme-color" content="#0f1424">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Tanjas kleine Begleiterin für ruhige Momente im Nachtdienst.">
+  <title>Nachtwache mit Tanja</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="kopf">
+    <img class="kopf-icon" src="icons/icon.svg" alt="" width="44" height="44">
+    <div class="kopf-text">
+      <h1>Nachtwache mit Tanja</h1>
+      <p class="widmung" id="widmung">Nur für Tanja 💛</p>
+    </div>
+    <button class="knopf-rund" id="knopf-einstellungen" type="button" aria-label="Einstellungen und eigene Aufmunterungen">⚙</button>
+  </header>
+
+  <main id="inhalt">
+    <!-- Startseite -->
+    <section id="ansicht-start" class="ansicht" aria-labelledby="gruss">
+      <h2 id="gruss" class="gruss">Schöne Nachtwache, Tanja 🌙</h2>
+      <p class="unterzeile" id="unterzeile">Schön, dass du da bist. Gönn dir einen kurzen Moment.</p>
+
+      <button class="knopf-gross" id="knopf-zufall" type="button">
+        <span class="knopf-gross-symbol" aria-hidden="true">✨</span>
+        Unterhalte mich kurz
+      </button>
+
+      <h3 class="abschnitt">Oder such dir was aus</h3>
+      <div class="kacheln">
+        <button class="kachel" type="button" data-typ="frage"><span aria-hidden="true">💬</span>Gesprächsfrage</button>
+        <button class="kachel" type="button" data-typ="fakt"><span aria-hidden="true">🦉</span>Kurioser Fakt</button>
+        <button class="kachel" type="button" data-typ="witz"><span aria-hidden="true">😄</span>Kleiner Witz</button>
+        <button class="kachel" type="button" data-typ="wde"><span aria-hidden="true">⚖️</span>Würdest du eher …?</button>
+        <button class="kachel" type="button" data-typ="wortkette"><span aria-hidden="true">🔤</span>Wortkette</button>
+        <button class="kachel" type="button" data-typ="aufmunterung"><span aria-hidden="true">💛</span>Aufmunterung</button>
+        <button class="kachel kachel-breit" type="button" data-typ="checkin"><span aria-hidden="true">🌙</span>Wie läuft’s gerade?</button>
+      </div>
+    </section>
+
+    <!-- Karte: Frage, Fakt, Witz, Würdest du eher, Aufmunterung -->
+    <section id="ansicht-karte" class="ansicht" hidden>
+      <article class="karte" aria-live="polite">
+        <p class="karte-etikett" id="karte-etikett"></p>
+        <p class="karte-text" id="karte-text"></p>
+        <div class="wde-wahl" id="wde-wahl" hidden>
+          <button class="knopf-wahl" id="wde-a" type="button"></button>
+          <span class="wde-oder" aria-hidden="true">oder</span>
+          <button class="knopf-wahl" id="wde-b" type="button"></button>
+        </div>
+        <button class="knopf-zweit" id="knopf-aufloesen" type="button" hidden>Auflösen 👀</button>
+        <p class="karte-zusatz" id="karte-zusatz" hidden></p>
+      </article>
+      <div class="leiste">
+        <button class="knopf-haupt" id="knopf-nochmal" type="button">Noch eins</button>
+        <button class="knopf-zweit" type="button" data-zurueck>Zurück</button>
+      </div>
+    </section>
+
+    <!-- Wortkette -->
+    <section id="ansicht-wortkette" class="ansicht" hidden>
+      <article class="karte">
+        <p class="karte-etikett">🔤 Wortkette</p>
+        <p class="hinweis">Nenn ein Wort, das mit dem letzten Buchstaben meines Wortes anfängt. Kein Wort doppelt!</p>
+        <p class="wk-letztes" aria-live="polite"><span id="wk-wort"></span></p>
+        <p class="wk-meldung" id="wk-meldung" aria-live="polite"></p>
+        <form id="wk-formular" class="wk-formular" autocomplete="off">
+          <label class="unsichtbar" for="wk-eingabe">Dein Wort</label>
+          <input id="wk-eingabe" type="text" inputmode="text" autocapitalize="words" spellcheck="false" maxlength="30" placeholder="Dein Wort …">
+          <button class="knopf-haupt" id="wk-los" type="submit">Los</button>
+        </form>
+        <p class="wk-stand" id="wk-stand"></p>
+      </article>
+      <div class="leiste">
+        <button class="knopf-zweit" id="wk-neu" type="button">Neue Runde</button>
+        <button class="knopf-zweit" type="button" data-zurueck>Zurück</button>
+      </div>
+    </section>
+
+    <!-- Check-in -->
+    <section id="ansicht-checkin" class="ansicht" hidden>
+      <article class="karte">
+        <p class="karte-etikett">🌙 Kurzer Check-in</p>
+        <p class="karte-text">Wie läuft’s gerade, Tanja?</p>
+        <div class="checkin-wahl" id="checkin-wahl">
+          <button class="knopf-wahl" type="button" data-stimmung="ruhig">😌 Ruhig</button>
+          <button class="knopf-wahl" type="button" data-stimmung="gut">🙂 Ganz gut</button>
+          <button class="knopf-wahl" type="button" data-stimmung="muede">😴 Müde</button>
+          <button class="knopf-wahl" type="button" data-stimmung="stressig">😮‍💨 Stressig</button>
+          <button class="knopf-wahl" type="button" data-stimmung="langweilig">🙃 Langweilig</button>
+        </div>
+        <p class="karte-zusatz" id="checkin-antwort" aria-live="polite" hidden></p>
+        <p class="hinweis klein">Deine Antwort bleibt hier. Es wird nichts gesendet.</p>
+      </article>
+      <div class="leiste">
+        <button class="knopf-zweit" type="button" data-zurueck>Zurück</button>
+      </div>
+    </section>
+
+    <!-- Einstellungen -->
+    <section id="ansicht-einstellungen" class="ansicht" hidden>
+      <article class="karte">
+        <p class="karte-etikett">⚙ Einstellungen</p>
+        <label class="schalter">
+          <input type="checkbox" id="schalter-gedimmt">
+          <span>Extra gedimmt (für ganz dunkle Räume)</span>
+        </label>
+        <label class="schalter">
+          <input type="checkbox" id="schalter-gross">
+          <span>Noch größere Schrift</span>
+        </label>
+      </article>
+      <article class="karte">
+        <p class="karte-etikett">💛 Eigene Aufmunterungen</p>
+        <p class="hinweis klein">Werden nur auf diesem Handy gespeichert und tauchen zusammen mit den hinterlegten Aufmunterungen auf.</p>
+        <form id="auf-formular" class="auf-formular">
+          <label class="unsichtbar" for="auf-eingabe">Neue Aufmunterung</label>
+          <textarea id="auf-eingabe" rows="3" maxlength="300" placeholder="z. B. Du schaffst das – und danach gibt’s Frühstück!"></textarea>
+          <button class="knopf-haupt" type="submit">Hinzufügen</button>
+        </form>
+        <ul class="auf-liste" id="auf-liste"></ul>
+      </article>
+      <div class="leiste">
+        <button class="knopf-zweit" type="button" data-zurueck>Zurück</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="fuss" id="fuss">Mit Liebe für Tanja gemacht</footer>
+
+  <script src="inhalte.js"></script>
+  <script src="aufmunterungen.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
